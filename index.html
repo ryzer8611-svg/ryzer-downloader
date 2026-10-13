@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#08090d">
+  <title>RYZER • Media Converter</title>
+  <style>
+    :root{color-scheme:dark;--bg:#08090d;--panel:#11131b;--line:#292d3a;--muted:#9da4b7;--text:#f4f6fb;--accent:#a9ff5b}
+    *{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(ellipse at 50% -10%,#20253b 0,transparent 48%),var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif;display:flex;align-items:center;justify-content:center;padding:22px}
+    .wrap{width:100%;max-width:720px}.brand{display:flex;align-items:center;gap:12px;justify-content:center;margin-bottom:24px}.mark{width:42px;height:42px;border-radius:13px;background:var(--accent);color:#10130d;display:grid;place-items:center;font-weight:950;font-size:18px;box-shadow:0 0 32px #a9ff5b30}.brandname{font-weight:900;letter-spacing:.16em;font-size:18px}.brandname span{color:var(--accent)}
+    .card{border:1px solid var(--line);background:linear-gradient(155deg,#151823f5,#0d0f16f5);border-radius:24px;padding:clamp(22px,5vw,42px);box-shadow:0 25px 90px #0008}.eyebrow{text-align:center;color:var(--accent);text-transform:uppercase;font-size:11px;letter-spacing:.2em;font-weight:800}.title{text-align:center;font-size:clamp(29px,6vw,44px);line-height:1.08;letter-spacing:-.045em;margin:12px 0}.title span{color:var(--accent)}.sub{text-align:center;color:var(--muted);line-height:1.65;margin:0 auto 28px;max-width:470px;font-size:14px}
+    .drop{display:block;border:1px dashed #51596b;border-radius:17px;padding:25px 16px;text-align:center;background:#ffffff03;cursor:pointer;transition:.2s}.drop:focus-within,.drop:hover{border-color:var(--accent);background:#a9ff5b08}.uploadicon{font-size:28px;display:block;margin-bottom:9px}.drop strong{display:block;font-size:15px}.drop small{display:block;color:var(--muted);margin-top:7px;font-size:12px}input[type=file]{display:block;width:100%;margin-top:14px;color:var(--muted);font-size:12px} .formats{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:18px 0}.format{border:1px solid var(--line);background:#0b0d13;border-radius:14px;padding:15px;display:flex;gap:11px;align-items:center;cursor:pointer}.format:has(input:checked){border-color:var(--accent);background:#a9ff5b0c}.format input{accent-color:var(--accent);width:17px;height:17px}.format b{display:block;font-size:15px}.format small{color:var(--muted);display:block;margin-top:4px;font-size:11px}.submit{width:100%;border:0;border-radius:13px;padding:16px;background:var(--accent);color:#10130d;font-size:14px;font-weight:900;cursor:pointer;letter-spacing:.02em}.submit:hover{filter:brightness(1.05)}.note{font-size:11px;color:var(--muted);line-height:1.6;text-align:center;margin:16px 0 0}.flash{border:1px solid #8d3c48;background:#341a20;color:#ffdfe4;padding:12px 14px;border-radius:12px;margin:0 0 16px;font-size:13px}.footer{color:#60687b;font-size:11px;text-align:center;margin-top:18px;letter-spacing:.08em}
+    @media(max-width:480px){body{padding:14px}.card{border-radius:19px}.formats{gap:8px}.format{padding:12px 10px}}
+  </style>
+</head>
+<body><main class="wrap">
+  <div class="brand"><div class="mark">R</div><div class="brandname">RYZER<span>.</span>TOOLS</div></div>
+  <section class="card">
+    <div class="eyebrow">Simple • Fast • Private</div>
+    <h1 class="title">MEDIA <span>CONVERTER</span></h1>
+    <p class="sub">Kendi medya dosyanı yükle, MP3 sese veya MP4 videoya dönüştür. Telefon ve tablet için tasarlandı.</p>
+    {% with messages = get_flashed_messages() %}{% if messages %}{% for message in messages %}<div class="flash">{{ message }}</div>{% endfor %}{% endif %}{% endwith %}
+    <form action="{{ url_for('convert') }}" method="post" enctype="multipart/form-data">
+      <label class="drop" for="media"><span class="uploadicon">⇧</span><strong>Medya dosyanı seç</strong><small>MP3, WAV, M4A, MP4, MOV, MKV veya WEBM • Maks. {{ max_upload_mb }} MB</small><input id="media" name="media" type="file" accept="audio/*,video/*" required></label>
+      <div class="formats">
+        <label class="format"><input type="radio" name="format" value="mp3" checked><span><b>MP3 Audio</b><small>Ses dosyasına dönüştür</small></span></label>
+        <label class="format"><input type="radio" name="format" value="mp4"><span><b>MP4 Video</b><small>Video dosyasına dönüştür</small></span></label>
+      </div>
+      <button class="submit" type="submit">DÖNÜŞTÜR VE İNDİR ↗</button>
+    </form>
+    <p class="note">Yalnızca sana ait veya indirme ve dönüştürme iznin bulunan içerikleri yükle. Bu araç YouTube bağlantılarından video indirmez; dosya dönüştürme içindir.</p>
+  </section>
+  <div class="footer">RYZER TOOLS · MEDIA CONVERSION</div>
+</main></body></html>
